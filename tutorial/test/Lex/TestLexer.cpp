@@ -15,37 +15,11 @@ bool test(const char *prog) {
 
   std::cout << "Lexing Result: " << std::endl;
   while(true) {
-    switch(CurTok.getKind()) {
-    case tok::eof:
-      std::cout << std::endl;
-      return result;
-    case tok::add:
-      std::cout << "ADD";
+    std::cout << CurTok.toString();
+    if (CurTok.is(tok::eof)) {
       break;
-    case tok::sub:
-      std::cout << "SUB";
-      break;
-    case tok::mul:
-      std::cout << "MUL";
-      break;
-    case tok::div:
-      std::cout << "DIV";
-      break;
-    case tok::num: {
-      auto *Ptr = CurTok.getLiteralData();
-      auto Len = CurTok.getLength();
-      std::cout << "NUM(" << std::string(Ptr, Len) << ")";
-      break;
-    }
-    case tok::comma:
-      std::cout << "COMMA";
-      break;
-    case tok::unknown:
-      std::cout << "UNKNOWN";
+    } else if(CurTok.is(tok::unknown)) {
       result = false;
-      break;
-    default:
-      break;
     }
     TheLexer.Lex(CurTok);
     std::cout << " ";

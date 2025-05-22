@@ -2,6 +2,7 @@
 #define __COMPILER_TUTORIAL_LEX_TOKEN__
 
 #include <stdint.h>
+#include <string>
 
 namespace tok {
 
@@ -40,6 +41,7 @@ public:
     Length = 0;
   }
 
+  bool is(tok::TokenKind K) { return Kind == K; }
   bool isNot(tok::TokenKind K) { return Kind != K; }
 
   tok::TokenKind getKind() const { return Kind; }
@@ -53,6 +55,20 @@ public:
   
   SourceLocation::UIntTy getLength() const { return Length; }
   void setLength(unsigned L) { Length = L; }
+
+  std::string toString() const { 
+    switch(Kind) {
+    case tok::add: return "ADD";
+    case tok::sub: return "SUB";
+    case tok::mul: return "MUL";
+    case tok::div: return "DIV";
+    case tok::num: return std::string((char*)PtrData, Length);
+    case tok::comma: return "COMMA"; 
+    case tok::unknown: return "UNKNOWN";
+    case tok::eof:
+    default: return "";
+    }
+  }
 };
 
 #endif 

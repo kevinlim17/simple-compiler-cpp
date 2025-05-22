@@ -1,14 +1,16 @@
 #include "Parse/Parser.h"
 
 #include <string>
+#include <iostream>
 
 std::unique_ptr<StmtAST> Parser::ParseTopLevelStmt() {
   return std::move(ParseBinaryCalcStmt());
 }
 
 std::unique_ptr<BinaryCalcStmtAST> Parser::ParseBinaryCalcStmt() {
-  op::OpCode Code;
+  ConsumeToken();
 
+  op::OpCode Code;
   switch (Tok.getKind()) {
   case tok::add:
     Code = op::add;
@@ -25,16 +27,16 @@ std::unique_ptr<BinaryCalcStmtAST> Parser::ParseBinaryCalcStmt() {
   default:
     return nullptr;
   };
-  ConsumeToken();
 
   auto L = ParseExpr();
   if (!L) {
     return nullptr;
   }
-  
-  if (!TryConsumeToken(tok::comma)) {
+
+  ConsumeToken();
+  if (Tok.isNot(tok::comma)) {
     return nullptr;
-  }
+  }  
 
   auto R = ParseExpr();
   if (!R) {
@@ -49,7 +51,9 @@ std::unique_ptr<ExprAST> Parser::ParseExpr() {
 }
 
 std::unique_ptr<NumExprAST> Parser::ParseNumExpr() {
-  if (Tok.getKind() != tok::num) {
+  ConsumeToken();
+ 
+  if (Tok.isNot(tok::num)) {
     return nullptr; 
   }
 
@@ -59,7 +63,4 @@ std::unique_ptr<NumExprAST> Parser::ParseNumExpr() {
 
   return std::make_unique<NumExprAST>(std::stoi(literal));
 }
-
-
-
 
