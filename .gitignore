@@ -1,0 +1,8 @@
+*.tar.xz
+llvm/
+build/
+
+*.o
+*.so
+*.exe
+*.dylib

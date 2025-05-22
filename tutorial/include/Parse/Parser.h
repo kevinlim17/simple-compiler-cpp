@@ -4,21 +4,38 @@
 #include <memory>
 
 #include "Parse/AST.h"
-#include "Lex/Token.h"
+#include "Lex/Lexer.h"
 
 class Parser {
 
-  // The current token we are p  
+  // The lexer  
+  Lexer &L;
+
+  // The current token  
   Token Tok;
 
 public:
-  bool ParseTopLevelStmt();
-  bool ParseExpr();
+  Parser(Lexer &Lexer): L(Lexer) {
+    Tok.startToken();
+    Tok.setKind(tok::eof);
+  }
 
-  bool ParseCalcStmt();
-  bool ParseNumExpr();
+  std::unique_ptr<StmtAST> ParseTopLevelStmt();
+  std::unique_ptr<BinaryCalcStmtAST> ParseBinaryCalcStmt();
+  
+  std::unique_ptr<ExprAST> ParseExpr();
+  std::unique_ptr<NumExprAST> ParseNumExpr();
 
-  ConsumeToken();
+  void ConsumeToken() {
+    L.Lex(Tok);
+  }
+
+  bool TryConsumeToken(tok::TokenKind Expected) {
+    if (Tok.isNot(Expected))
+      return false;
+    L.Lex(Tok);
+    return true;
+  }
 };
 
 #endif 

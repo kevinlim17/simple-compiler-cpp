@@ -40,6 +40,8 @@ public:
     Length = 0;
   }
 
+  bool isNot(tok::TokenKind K) { return Kind != K; }
+
   tok::TokenKind getKind() const { return Kind; }
   void setKind(tok::TokenKind K) { Kind = K; }
   
