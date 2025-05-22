@@ -13,16 +13,16 @@ enum OpCode {
 };
 }
 
-class ExprAST {
+class Expr {
 public:
-  virtual ~ExprAST() = default;
+  virtual ~Expr() = default;
   virtual std::string toString(int depth = 0) = 0;
 };
 
-class NumExprAST : public ExprAST {
+class NumExpr : public Expr {
   int Val;
 public:
-  NumExprAST(int Val) : Val(Val) {}
+  NumExpr(int Val) : Val(Val) {}
   
   std::string toString(int depth = 0) {
     return std::string(depth * 2, ' ') 
@@ -30,19 +30,19 @@ public:
   }
 };
 
-class StmtAST {
+class Stmt {
 public:
-  virtual ~StmtAST() = default;
+  virtual ~Stmt() = default;
   virtual std::string toString(int depth = 0) = 0;
 };
 
-class BinaryCalcStmtAST : public StmtAST {
+class BinaryCalcStmt : public Stmt {
   op::OpCode Op;
-  std::unique_ptr<ExprAST> LHS, RHS;
+  std::unique_ptr<Expr> LHS, RHS;
 
 public:
-  BinaryCalcStmtAST(op::OpCode Op, std::unique_ptr<ExprAST> LHS,
-                    std::unique_ptr<ExprAST> RHS)
+  BinaryCalcStmt(op::OpCode Op, std::unique_ptr<Expr> LHS,
+                 std::unique_ptr<Expr> RHS)
   : Op(Op), LHS(std::move(LHS)), RHS(std::move(RHS)) {}
   
   std::string toString(int depth = 0) {

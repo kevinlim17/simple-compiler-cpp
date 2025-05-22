@@ -20,11 +20,11 @@ public:
     Tok.setKind(tok::eof);
   }
 
-  std::unique_ptr<StmtAST> ParseTopLevelStmt();
-  std::unique_ptr<BinaryCalcStmtAST> ParseBinaryCalcStmt();
+  std::unique_ptr<Stmt> ParseTopLevelStmt();
+  std::unique_ptr<BinaryCalcStmt> ParseBinaryCalcStmt();
   
-  std::unique_ptr<ExprAST> ParseExpr();
-  std::unique_ptr<NumExprAST> ParseNumExpr();
+  std::unique_ptr<Expr> ParseExpr();
+  std::unique_ptr<NumExpr> ParseNumExpr();
 
   void ConsumeToken() {
     L.Lex(Tok);

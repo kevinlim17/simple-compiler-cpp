@@ -3,11 +3,11 @@
 #include <string>
 #include <iostream>
 
-std::unique_ptr<StmtAST> Parser::ParseTopLevelStmt() {
+std::unique_ptr<Stmt> Parser::ParseTopLevelStmt() {
   return std::move(ParseBinaryCalcStmt());
 }
 
-std::unique_ptr<BinaryCalcStmtAST> Parser::ParseBinaryCalcStmt() {
+std::unique_ptr<BinaryCalcStmt> Parser::ParseBinaryCalcStmt() {
   ConsumeToken();
 
   op::OpCode Code;
@@ -43,14 +43,14 @@ std::unique_ptr<BinaryCalcStmtAST> Parser::ParseBinaryCalcStmt() {
     return nullptr;
   }
   
-  return std::make_unique<BinaryCalcStmtAST>(Code, std::move(L), std::move(R));
+  return std::make_unique<BinaryCalcStmt>(Code, std::move(L), std::move(R));
 }
 
-std::unique_ptr<ExprAST> Parser::ParseExpr() { 
+std::unique_ptr<Expr> Parser::ParseExpr() { 
   return std::move(ParseNumExpr());
 }
 
-std::unique_ptr<NumExprAST> Parser::ParseNumExpr() {
+std::unique_ptr<NumExpr> Parser::ParseNumExpr() {
   ConsumeToken();
  
   if (Tok.isNot(tok::num)) {
@@ -61,6 +61,6 @@ std::unique_ptr<NumExprAST> Parser::ParseNumExpr() {
   auto Len = Tok.getLength();
   std::string literal(Ptr, Len);
 
-  return std::make_unique<NumExprAST>(std::stoi(literal));
+  return std::make_unique<NumExpr>(std::stoi(literal));
 }
 
