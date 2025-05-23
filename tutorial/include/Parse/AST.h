@@ -56,7 +56,7 @@ public:
     return std::string(depth * 2, ' ') 
          + "- BinaryCalcExpr: " + opStr + "\n"
          + LHS->toString(depth + 1) + "\n"
-         + RHS->toString(depth + 1) + "\n";
+         + RHS->toString(depth + 1);
   }
 };
 

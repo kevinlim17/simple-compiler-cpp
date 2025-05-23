@@ -4,12 +4,11 @@
 #include <iostream>
 
 std::unique_ptr<Stmt> Parser::ParseTopLevelStmt() {
+  ConsumeToken();
   return std::move(ParseBinaryCalcStmt());
 }
 
 std::unique_ptr<BinaryCalcStmt> Parser::ParseBinaryCalcStmt() {
-  ConsumeToken();
-
   op::OpCode Code;
   switch (Tok.getKind()) {
   case tok::add:
@@ -22,12 +21,13 @@ std::unique_ptr<BinaryCalcStmt> Parser::ParseBinaryCalcStmt() {
     Code = op::mul;
     break;
   case tok::div:
-    Code = op::sub;
+    Code = op::div;
     break;
   default:
     return nullptr;
   };
 
+  ConsumeToken();
   auto L = ParseExpr();
   if (!L) {
     return nullptr;
@@ -38,6 +38,7 @@ std::unique_ptr<BinaryCalcStmt> Parser::ParseBinaryCalcStmt() {
     return nullptr;
   }  
 
+  ConsumeToken();
   auto R = ParseExpr();
   if (!R) {
     return nullptr;
@@ -51,8 +52,6 @@ std::unique_ptr<Expr> Parser::ParseExpr() {
 }
 
 std::unique_ptr<NumExpr> Parser::ParseNumExpr() {
-  ConsumeToken();
- 
   if (Tok.isNot(tok::num)) {
     return nullptr; 
   }
