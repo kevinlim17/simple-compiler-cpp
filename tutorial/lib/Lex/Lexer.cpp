@@ -56,7 +56,7 @@ LexStart:
   case 'M':    
     Char = getChar(CurPtr);
     NextChar = getChar(CurPtr + 1);
-    if (Char != 'U' || NextChar != 'L') {
+    if (Char == 'U' && NextChar == 'L') {
       Kind = tok::mul;
       CurPtr += 2;
     }
