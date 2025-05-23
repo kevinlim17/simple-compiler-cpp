@@ -20,7 +20,7 @@ LexStart:
     BufferPtr = CurPtr;
   }
 
-  tok::TokenKind Kind;
+  tok::TokenKind Kind = tok::unknown;
 
   char Char = getAndAdvanceChar(CurPtr);
   char NextChar;
