@@ -23,7 +23,8 @@ class NumExpr : public Expr {
   int Val;
 public:
   NumExpr(int Val) : Val(Val) {}
-  
+  const int getVal() const { return Val;}
+
   std::string toString(int depth = 0) {
     return std::string(depth * 2, ' ') 
          + "- NumExpr: " + std::to_string(Val);
@@ -44,7 +45,11 @@ public:
   BinaryCalcStmt(op::OpCode Op, std::unique_ptr<Expr> LHS,
                  std::unique_ptr<Expr> RHS)
   : Op(Op), LHS(std::move(LHS)), RHS(std::move(RHS)) {}
-  
+
+  op::OpCode getOpCode() const { return Op; }
+  const Expr *getLHS() const { return LHS.get(); }
+  const Expr *getRHS() const { return RHS.get(); }
+
   std::string toString(int depth = 0) {
     std::string opStr;
     switch(Op) {
@@ -54,7 +59,7 @@ public:
     case op::div: opStr = "Div"; break;
     }
     return std::string(depth * 2, ' ') 
-         + "- BinaryCalcExpr: " + opStr + "\n"
+         + "- BinaryCalcStmt: " + opStr + "\n"
          + LHS->toString(depth + 1) + "\n"
          + RHS->toString(depth + 1);
   }

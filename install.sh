@@ -44,8 +44,10 @@ else
   echo "$BIN_PATH is already in PATH in ~/.bashrc"
 fi
 
-LIB_PATH="$(pwd)/llvm/bin"
-EXPORT_LIB="export LD_LIBRARY_PATH=\"$LIB_PATH:\$LD_LIBRARY_PATH\""
+LIB_PATH="$(pwd)/llvm/lib"
+STDLIB_PATH="$(pwd)/llvm/lib/x86_64-unknown-linux-gnu"
+
+EXPORT_LIB="export LD_LIBRARY_PATH=\"$LIB_PATH:$STDLIB_PATH:\$LD_LIBRARY_PATH\""
 
 if ! grep -Fxq "$EXPORT_LIB" ~/.bashrc; then
   echo "Updating ~/.bashrc to include $LIB_PATH in LD_LIBRARY_PATH..."
