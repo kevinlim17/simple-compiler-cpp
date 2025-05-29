@@ -12,7 +12,7 @@ PreservedAnalyses CallCount::run(const Function &F,
   return PreservedAnalyses::all();
 }
 
-extern "C" ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {  
+extern "C" ::PassPluginLibraryInfo llvmGetPassPluginInfo() {  
   return {
     LLVM_PLUGIN_API_VERSION, "CallCountPlugin", LLVM_VERSION_STRING,
     [](PassBuilder &PB) {

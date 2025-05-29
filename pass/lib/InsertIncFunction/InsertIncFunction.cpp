@@ -6,22 +6,22 @@
 
 #include "InsertIncFunction/InsertIncFunction.h"
 
-llvm::PreservedAnalyses InsertIncFunction::run(const llvm::Module &M, 
-  llvm::ModuleAnalysisManager &FAM) {
+PreservedAnalyses InsertIncFunction::run(const Module &M, 
+  ModuleAnalysisManager &MAM) {
   dbgs() << "[InsertIncFunction] Pass Entry\n";
-  return llvm::PreservedAnalyses::all();
+  return PreservedAnalyses::all();
 }
 
-extern "C" llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {  
+extern "C" PassPluginLibraryInfo llvmGetPassPluginInfo() {  
   return {  
     LLVM_PLUGIN_API_VERSION,  
     "InsertIncFunction",
     LLVM_VERSION_STRING, 
-    [](llvm::PassBuilder &PB) {
+    [](PassBuilder &PB) {
       dbgs() << "[Plugin] Registering InsertIncFunction Pass\n";
       PB.registerPipelineParsingCallback(
-        [](const llvm::StringRef name, llvm::ModulePassManager &MPM,
-           llvm::ArrayRef<llvm::PassBuilder::PipelineElement>) {
+        [](const StringRef name, ModulePassManager &MPM,
+           ArrayRef<PassBuilder::PipelineElement>) {
           if (name == "insert-inc-function") {
             MPM.addPass(InsertIncFunction()); 
             return true; 

@@ -6,22 +6,22 @@
 
 #include "LoopInfoPrinter/LoopInfoPrinter.h"
 
-llvm::PreservedAnalyses LoopInfoPrinter::run(const llvm::Function &F, 
-  llvm::FunctionAnalysisManager &FAM) {
+PreservedAnalyses LoopInfoPrinter::run(const Function &F, 
+  FunctionAnalysisManager &FAM) {
   dbgs() << "[LoopInfoPrinter] Pass Entry\n";
-  return llvm::PreservedAnalyses::all();
+  return PreservedAnalyses::all();
 }
 
-extern "C" llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {  
+extern "C" PassPluginLibraryInfo llvmGetPassPluginInfo() {  
   return {  
     LLVM_PLUGIN_API_VERSION,  
     "LoopInfoPrinter",  
     LLVM_VERSION_STRING,  
-    [](llvm::PassBuilder &PB) {  
+    [](PassBuilder &PB) {  
       dbgs() << "[Plugin] Registering LoopInfoPrinter Pass\n";
       PB.registerPipelineParsingCallback(  
-        [](const llvm::StringRef name, llvm::FunctionPassManager &FPM,  
-           llvm::ArrayRef<llvm::PassBuilder::PipelineElement>) {  
+        [](const StringRef name, FunctionPassManager &FPM,  
+           ArrayRef<PassBuilder::PipelineElement>) {  
           if (name == "loop-info-printer") {  
             FPM.addPass(LoopInfoPrinter());  
             return true;  
