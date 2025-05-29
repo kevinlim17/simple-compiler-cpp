@@ -1,0 +1,6 @@
+add_subdirectory(CallCount)
+add_subdirectory(DynamicCallCount)
+add_subdirectory(FunctionNamePrinter)
+add_subdirectory(InsertIncFunction)
+add_subdirectory(InstCount)
+add_subdirectory(LoopInfoPrinter)

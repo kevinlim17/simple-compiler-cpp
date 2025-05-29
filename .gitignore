@@ -2,6 +2,8 @@
 llvm/
 build/
 
+*.bc
+*.ll
 *.o
 *.so
 *.exe
