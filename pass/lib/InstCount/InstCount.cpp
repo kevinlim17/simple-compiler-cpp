@@ -15,7 +15,7 @@ PreservedAnalyses InstCount::run(const Function &F,
 extern "C" PassPluginLibraryInfo llvmGetPassPluginInfo() {
   return {
     LLVM_PLUGIN_API_VERSION,
-    "InstCount",
+    "InstCountPlugin",
     LLVM_VERSION_STRING,
     [](PassBuilder &PB) {
       dbgs() << "[Plugin] Registering InstCount Pass\n";

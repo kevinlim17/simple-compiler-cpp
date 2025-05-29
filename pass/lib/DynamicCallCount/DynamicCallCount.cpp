@@ -15,7 +15,7 @@ PreservedAnalyses DynamicCallCount::run(const Function &F,
 extern "C" PassPluginLibraryInfo llvmGetPassPluginInfo() {  
   return {  
     LLVM_PLUGIN_API_VERSION, 
-    "DynamicCallCount", 
+    "DynamicCallCountPlugin", 
     LLVM_VERSION_STRING, 
     [](PassBuilder &PB) {  
       dbgs() << "[Plugin] Registering DynamicCallCount Pass\n";

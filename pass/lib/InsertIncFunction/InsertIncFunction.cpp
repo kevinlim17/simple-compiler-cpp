@@ -15,7 +15,7 @@ PreservedAnalyses InsertIncFunction::run(const Module &M,
 extern "C" PassPluginLibraryInfo llvmGetPassPluginInfo() {  
   return {  
     LLVM_PLUGIN_API_VERSION,  
-    "InsertIncFunction",
+    "InsertIncFunctionPlugin",
     LLVM_VERSION_STRING, 
     [](PassBuilder &PB) {
       dbgs() << "[Plugin] Registering InsertIncFunction Pass\n";
