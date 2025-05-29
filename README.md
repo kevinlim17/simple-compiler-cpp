@@ -1,4 +1,4 @@
-# Compiler Design Tutorial
+# Compiler Implementation Tutorial
 
 This tutorial helps you to get hands-on experiences in designing a toy compiler. 
 
@@ -22,20 +22,25 @@ Currently, the compiler can handle a single arithmatic statement only. The goal 
 
 ### Lexer
 
-You will first extend the lexer to handle the new line and the `PRINT` token.
+You will first extend the lexer to handle the `PRINT` token.
 
-- Modify `include/Lex/Token.h` to add a new token
-- Modify `lib/Lex/Lexer.cpp` to handle the new line and the `PRINT` token.
+- Modify `include/Lex/Token.h` to add a new token.
+- Modify `lib/Lex/Lexer.cpp` to handle the `PRINT` token.
 
 You may change any other files if you need.
 
 ### Parser
 
-You will extend the parser to handle multiple statements with the support for the printing statement.
+You will extend the parser to handle compound and printing statements.
 
-- Modify `include/Lex/Parser.h` to declare new functions to handle multiple statements.
+- Modify `include/Parse/AST.h` to declare new AST nodes for compound and printing statmenets.
+- Modify `include/Parse/Parser.h` to declare new functions to handle compound and printing statements.
 - Modify `lib/Parse/Parser.cpp' to implement the new functions. 
 
 ### CodeGen
 
+You will extend the code generator to handle compound and printing statements.
+
+- Modify `include/CodeGen/CodeGenFunction.h` to declare new functions to emit code for compound and printing statements.
+- Modify `include/CodeGen/CodeGenFunction.cpp` to implement the new functions.
 
