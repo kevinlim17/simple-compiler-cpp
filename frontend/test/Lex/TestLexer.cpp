@@ -30,10 +30,12 @@ bool test(const char *prog) {
 }
 
 int main () {
-  const char *prog1 = "ADD 3, 100";
-  bool result = test(prog1); 
-  
+  const char *prog1 = "ADD 3, 100 PRINT";
+  bool result = test(prog1);
+
   if (!result) {
     std::cout << "Lexing failed with unknown token(s)" << std::endl;
   }
+
+  return 0;
 }
