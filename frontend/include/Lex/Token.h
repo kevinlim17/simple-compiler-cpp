@@ -62,7 +62,7 @@ public:
             case tok::sub: return "SUB";
             case tok::mul: return "MUL";
             case tok::div: return "DIV";
-            case tok::num: return std::string((char *) PtrData, Length);
+            case tok::num: return {static_cast<char *>(PtrData), Length};
             case tok::comma: return "COMMA";
             case tok::unknown: return "UNKNOWN";
             case tok::eof:

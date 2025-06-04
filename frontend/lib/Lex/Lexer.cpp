@@ -24,7 +24,7 @@ LexStart:
 
     char Char = getAndAdvanceChar(CurPtr);
     char NextChar;
-    const char* printChar = "RINT";
+    const char *printChar = "RINT";
 
     switch (Char) {
         case 0:
@@ -64,7 +64,7 @@ LexStart:
             break;
         case 'P':
             for (int i = 0; i < 4; i++) {
-                if (printChar[i] != getChar(CurPtr + i)) {
+                if (*(printChar + i) != getChar(CurPtr + i)) {
                     break;
                 }
                 if (i == 3) {
