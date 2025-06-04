@@ -4,6 +4,8 @@ add_library(CodeGen SHARED
   CodeGenFunction.cpp
 )
 
+target_link_libraries(CodeGen PRIVATE c++ c++abi)
+
 target_link_options(CodeGen PRIVATE -flto -fuse-ld=lld)
 target_link_libraries(CodeGen
   PRIVATE

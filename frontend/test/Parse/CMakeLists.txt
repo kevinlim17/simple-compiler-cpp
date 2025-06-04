@@ -3,3 +3,4 @@ add_executable(TestParser
 )
 
 target_link_libraries(TestParser PRIVATE Lex Parse)
+target_link_libraries(TestParser PRIVATE c++ c++abi)

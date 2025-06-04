@@ -3,3 +3,4 @@ add_executable(TestLexer
 )
 
 target_link_libraries(TestLexer PRIVATE Lex)
+target_link_libraries(TestLexer PRIVATE c++ c++abi)
