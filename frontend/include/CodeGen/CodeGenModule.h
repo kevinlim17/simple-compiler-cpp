@@ -9,7 +9,7 @@ class CodeGenModule {
   llvm::LLVMContext &VMContext;
 
 public:
-  CodeGenModule(llvm::Module &M);
+  explicit CodeGenModule(llvm::Module &M);
 
   llvm::LLVMContext &getLLVMContext() { return VMContext; }
   llvm::Module &getModule() const { return TheModule; }
