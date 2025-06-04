@@ -4,9 +4,9 @@
 #include <memory>
 #include <string>
 
+class CompoundStmts;
 class CompoundUnaryStmts;
 class PrintStmt;
-class PrintLastStmts;
 class UnaryCalcStmt;
 class BinaryCalcStmt;
 
@@ -60,6 +60,10 @@ public:
 
     std::string toString(int depth = 0) override;
 
+    const std::unique_ptr<BinaryCalcStmt>& getFirstStm() const { return FirstStm; }
+    const std::unique_ptr<CompoundUnaryStmts>& getUnaryStms() const { return UnaryStms; }
+    const std::unique_ptr<PrintStmt>& getLastStm() const { return LastStm; }
+
     CompoundStmts(std::unique_ptr<BinaryCalcStmt> stm1, std::unique_ptr<CompoundUnaryStmts> stm2,
                   std::unique_ptr<PrintStmt> stm3) : FirstStm(std::move(stm1)),
                                                      UnaryStms(std::move(stm2)), LastStm(std::move(stm3)) {
@@ -82,6 +86,9 @@ public:
 
     explicit CompoundUnaryStmts(std::unique_ptr<UnaryCalcStmt> UnaryStmt) : FirstUnaryStm(std::move(UnaryStmt)) {
     }
+
+    const std::unique_ptr<UnaryCalcStmt>& getFirstUnaryStm() const { return FirstUnaryStm; }
+    const std::unique_ptr<CompoundUnaryStmts>& getLastUnaryStm() const { return LastUnaryStmts; }
 
     std::string toString(int depth = 0) override;
 };
