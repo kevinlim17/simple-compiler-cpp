@@ -24,7 +24,7 @@ bool test(const char *prog) {
 }
 
 int main () {
-  const char *prog1 = "ADD 3, 100";
+  const char *prog1 = "ADD 4, 10 DIV 4 MUL 7 PRINT";
   bool result = test(prog1); 
   
   if (!result) {
